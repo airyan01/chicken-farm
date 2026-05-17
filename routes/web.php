@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ChickenController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Caretaker\CareController;
 
 Route::get('/', function () {
@@ -11,7 +12,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     if (auth()->user()->isAdmin()) {
-        return redirect()->route('admin.chickens.index');
+        return redirect()->route('admin.dashboard');
     }
     return redirect()->route('caretaker.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -24,6 +25,8 @@ Route::middleware('auth')->group(function () {
 
 // Admin Route Group
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/history', [DashboardController::class, 'history'])->name('history.index');
     Route::resource('chickens', ChickenController::class);
 });
 
