@@ -13,9 +13,12 @@ class CaretakerMiddleware
      *
      * @param  Closure(Request): (Response)  $next
      */
+    public function handle(Request $request, Closure $next): Response
+    {
         if ($request->user() && ($request->user()->isCaretaker() || $request->user()->isAdmin())) {
             return $next($request);
         }
 
         abort(403, 'Unauthorized action. Caretaker role required.');
+    }
 }
