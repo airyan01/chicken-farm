@@ -20,6 +20,11 @@
                             {{ __('Manage Chickens') }}
                         </x-nav-link>
                     @endif
+                    @if (Auth::user()->isCaretaker())
+                        <x-nav-link :href="route('caretaker.dashboard')" :active="request()->routeIs('caretaker.*')">
+                            {{ __('My Chickens') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -78,6 +83,11 @@
             @if (Auth::user()->isAdmin())
                 <x-responsive-nav-link :href="route('admin.chickens.index')" :active="request()->routeIs('admin.chickens.*')">
                     {{ __('Manage Chickens') }}
+                </x-responsive-nav-link>
+            @endif
+            @if (Auth::user()->isCaretaker())
+                <x-responsive-nav-link :href="route('caretaker.dashboard')" :active="request()->routeIs('caretaker.*')">
+                    {{ __('My Chickens') }}
                 </x-responsive-nav-link>
             @endif
         </div>
