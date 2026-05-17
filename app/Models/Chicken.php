@@ -36,4 +36,12 @@ class Chicken extends Model
     {
         return $this->hasMany(CareLog::class);
     }
+
+    /**
+     * Get the latest care log for this chicken.
+     */
+    public function latestCareLog()
+    {
+        return $this->hasOne(CareLog::class)->latestOfMany('date');
+    }
 }

@@ -16,8 +16,14 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     @if (Auth::user()->isAdmin())
+                        <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                            {{ __('Coop Dashboard') }}
+                        </x-nav-link>
                         <x-nav-link :href="route('admin.chickens.index')" :active="request()->routeIs('admin.chickens.*')">
                             {{ __('Manage Chickens') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.history.index')" :active="request()->routeIs('admin.history.*')">
+                            {{ __('Care History') }}
                         </x-nav-link>
                     @endif
                     @if (Auth::user()->isCaretaker())
@@ -81,8 +87,14 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             @if (Auth::user()->isAdmin())
+                <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                    {{ __('Coop Dashboard') }}
+                </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('admin.chickens.index')" :active="request()->routeIs('admin.chickens.*')">
                     {{ __('Manage Chickens') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('admin.history.index')" :active="request()->routeIs('admin.history.*')">
+                    {{ __('Care History') }}
                 </x-responsive-nav-link>
             @endif
             @if (Auth::user()->isCaretaker())
